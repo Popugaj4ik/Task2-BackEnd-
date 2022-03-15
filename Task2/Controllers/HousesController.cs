@@ -29,7 +29,7 @@ namespace Task2.Controllers
         }
 
         // GET: api/Houses/5
-        [HttpGet("{id}")]
+        [HttpGet("byID/{id}")]
         public async Task<ActionResult<House>> GetHouse(long id)
         {
             var house = await _context.Houses.FindAsync(id);
@@ -40,6 +40,14 @@ namespace Task2.Controllers
             }
 
             return house;
+        }
+
+        [HttpGet("getByUser/{userid}")]
+        public async Task<ActionResult<House[]>> GetHousesByUser(long userid)
+        {
+            var list = await _context.Houses.Where(h => h.UserOwnerID == userid).ToListAsync();
+
+            return Ok(list);
         }
 
         // PUT: api/Houses/5
@@ -82,14 +90,6 @@ namespace Task2.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetHouse), new { id = house.Id }, house);
-        }
-
-        [HttpPost("getByUser")]
-        public async Task<ActionResult<IEnumerable<House>>> GetByUser(User user)
-        {
-            var list = await _context.Houses.Where(h => h.UserOwnerID == user.Id).ToListAsync();
-
-            return CreatedAtAction(nameof(GetHouses), list);
         }
 
         // DELETE: api/Houses/5

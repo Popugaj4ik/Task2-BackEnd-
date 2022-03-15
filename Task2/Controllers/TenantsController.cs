@@ -30,7 +30,7 @@ namespace Task2.Controllers
         }
 
         // GET: api/Tenants/5
-        [HttpGet("{id}")]
+        [HttpGet("byID/{id}")]
         public async Task<ActionResult<Tenant>> GetTenant(long id)
         {
             var tenant = await _context.Tenants.FindAsync(id);
@@ -41,6 +41,14 @@ namespace Task2.Controllers
             }
 
             return tenant;
+        }
+
+        [HttpGet("getByUser/{id}")]
+        public async Task<ActionResult<Tenant[]>> GetTenantByUser(long userid)
+        {
+            var list = await _context.Tenants.Where(t => t.UserOwnerID == userid).ToListAsync();
+
+            return Ok(list);
         }
 
         // PUT: api/Tenants/5
@@ -79,13 +87,6 @@ namespace Task2.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTenants), new { id = tenant.Id }, tenant);
-        }
-        [HttpPost("getByUser")]
-        public async Task<ActionResult<Tenant>> GetByUser(User user)
-        {
-            var list = await _context.Tenants.Where(t=>t.UserOwnerID == user.Id).ToListAsync();
-
-            return Ok(list);
         }
 
         // DELETE: api/Tenants/5

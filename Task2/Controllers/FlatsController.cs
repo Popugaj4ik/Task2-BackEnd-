@@ -46,7 +46,7 @@ namespace Task2.Controllers
         }
 
         // GET: api/Flats/5
-        [HttpGet("{id}")]
+        [HttpGet("byID/{id}")]
         public async Task<ActionResult<FlatDTO>> GetFlat(long id)
         {
             var flat = await _context.Flats.FindAsync(id);
@@ -70,6 +70,14 @@ namespace Task2.Controllers
             };
 
             return flatDTO;
+        }
+
+        [HttpGet("getByUser/{id}")]
+        public async Task<ActionResult<Flat[]>> GetFlatsByUser(long userid)
+        {
+            var list = await _context.Flats.Where(f => f.UserOwnerID == userid).ToListAsync();
+
+            return Ok(list);
         }
 
         // PUT: api/Flats/5
@@ -105,14 +113,6 @@ namespace Task2.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetFlat), new { id = flat.Id }, flat);
-        }
-
-        [HttpPost("getByUser")]
-        public async Task<ActionResult<Flat>> GetByUser(User user)
-        {
-            var list = await _context.Flats.Where(f=>f.UserOwnerID == user.Id).ToListAsync();
-
-            return CreatedAtAction(nameof(GetFlats), list);
         }
 
         // DELETE: api/Flats/5

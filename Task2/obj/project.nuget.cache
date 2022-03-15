@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MVHBaJOOyCd37AVekZug2f2du8c5oOR+053v/am2dAnzl+tTC+1bctf2xMZeRAmTQclI4wDMHX7xBgc9tdoVLg==",
+  "dgSpecHash": "H/pfSxOnOCAbXOCE4aDtoa2hqfGI9HjzuqyTcP/npqkTnwEuXJqw9fiPS+fpN7ZkOgOugBReNmhhZJoLoTgreg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pasha\\Desktop\\Tasks\\Task2\\Task2\\Task2.csproj",
+  "projectFilePath": "C:\\Users\\Pasha\\Desktop\\Task2\\Task2-BackEnd-\\Task2\\Task2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pasha\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pasha\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

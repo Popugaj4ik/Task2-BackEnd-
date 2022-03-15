@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Task2.Models;
 using Task2.Models.DTO;
+using System.Text;
 
 namespace Task2.Controllers
 {
@@ -100,6 +102,8 @@ namespace Task2.Controllers
                 return NoContent();
             }
 
+            user.Password = HashPassword(user.Password);
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
@@ -109,6 +113,8 @@ namespace Task2.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> LoginUser(User user)
         {
+            user.Password = HashPassword(user.Password);
+
             if (
                 await _context.User.AnyAsync(u => u.eMail != user.eMail || u.Password != user.Password)
                 && await _context.User.ContainsAsync(user))
@@ -145,5 +151,18 @@ namespace Task2.Controllers
         }
 
         private UserDTO UserToUserDTO(User user) => new UserDTO() { Id = user.Id, UserName = user.UserName };
+
+        private string HashPassword(string password)
+        {
+            var md5hash = MD5.Create();
+
+            var sourcebytesBytes = Encoding.UTF8.GetBytes(password);
+
+            var hashbytes = md5hash.ComputeHash(sourcebytesBytes);
+
+            var hash = BitConverter.ToString(hashbytes).Replace("-", String.Empty);
+
+            return hash;
+        }
     }
 }
