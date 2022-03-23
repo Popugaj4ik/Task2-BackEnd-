@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace Task2.Controllers
 
         // GET: api/Tenants
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Tenant>>> GetTenants()
         {
             return await _context.Tenants.ToListAsync();
@@ -31,6 +33,7 @@ namespace Task2.Controllers
 
         // GET: api/Tenants/5
         [HttpGet("byID/{id}")]
+        [Authorize]
         public async Task<ActionResult<Tenant>> GetTenant(long id)
         {
             var tenant = await _context.Tenants.FindAsync(id);
@@ -44,6 +47,7 @@ namespace Task2.Controllers
         }
 
         [HttpGet("getByUser/{id}")]
+        [Authorize]
         public async Task<ActionResult<Tenant[]>> GetTenantByUser(long userid)
         {
             var list = await _context.Tenants.Where(t => t.UserOwnerID == userid).ToListAsync();
@@ -54,6 +58,7 @@ namespace Task2.Controllers
         // PUT: api/Tenants/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutTenant(long id, Tenant tenant)
         {
             if (id != tenant.Id)
@@ -80,6 +85,7 @@ namespace Task2.Controllers
         // POST: api/Tenants
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("NewTenant")]
+        [Authorize]
         public async Task<ActionResult<Tenant>> PostTenant(Tenant tenant)
         {
             _context.Tenants.Add(tenant);
@@ -91,6 +97,7 @@ namespace Task2.Controllers
 
         // DELETE: api/Tenants/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteTenant(long id)
         {
             var tenant = await _context.Tenants.FindAsync(id);

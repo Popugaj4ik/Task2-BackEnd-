@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Task2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,16 +15,43 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseInMemoryDatabase("HousesList");
 });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddCors();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("EnableCors", builder =>
+    {
+        builder.AllowAnyHeader()
+            .AllowAnyOrigin()
+            .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = "https://localhost:7047",
+        ValidAudience = "https://localhost:4200",
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretKey@667890"))
+    };
+});
+
 //builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
 
-app.UseCors(options =>
-options.WithOrigins("http://localhost:4200")
-.AllowAnyMethod()
-.AllowAnyHeader());
+app.UseCors("EnableCors");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -32,6 +62,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

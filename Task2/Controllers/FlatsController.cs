@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace Task2.Controllers
 
         // GET: api/Flats
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<FlatDTO>>> GetFlats()
         {
             var list = await _context.Flats.ToListAsync();
@@ -47,6 +49,7 @@ namespace Task2.Controllers
 
         // GET: api/Flats/5
         [HttpGet("byID/{id}")]
+        [Authorize]
         public async Task<ActionResult<FlatDTO>> GetFlat(long id)
         {
             var flat = await _context.Flats.FindAsync(id);
@@ -73,6 +76,7 @@ namespace Task2.Controllers
         }
 
         [HttpGet("getByUser/{id}")]
+        [Authorize]
         public async Task<ActionResult<Flat[]>> GetFlatsByUser(long userid)
         {
             var list = await _context.Flats.Where(f => f.UserOwnerID == userid).ToListAsync();
@@ -83,6 +87,7 @@ namespace Task2.Controllers
         // PUT: api/Flats/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutFlat(long id, Flat flat)
         {
             if (flat == null)
@@ -107,6 +112,7 @@ namespace Task2.Controllers
         // POST: api/Flats
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("NewFlat")]
+        [Authorize]
         public async Task<ActionResult<Flat>> PostFlat(Flat flat)
         {
             _context.Flats.Add(flat);
@@ -117,6 +123,7 @@ namespace Task2.Controllers
 
         // DELETE: api/Flats/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteFlat(long id)
         {
             var flat = await _context.Flats.FindAsync(id);

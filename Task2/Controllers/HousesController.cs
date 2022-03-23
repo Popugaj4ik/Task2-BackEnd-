@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace Task2.Controllers
 
         // GET: api/Houses
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<House>>> GetHouses()
         {
             return await _context.Houses.ToListAsync();
@@ -30,6 +32,7 @@ namespace Task2.Controllers
 
         // GET: api/Houses/5
         [HttpGet("byID/{id}")]
+        [Authorize]
         public async Task<ActionResult<House>> GetHouse(long id)
         {
             var house = await _context.Houses.FindAsync(id);
@@ -43,6 +46,7 @@ namespace Task2.Controllers
         }
 
         [HttpGet("getByUser/{userid}")]
+        [Authorize]
         public async Task<ActionResult<House[]>> GetHousesByUser(long userid)
         {
             var list = await _context.Houses.Where(h => h.UserOwnerID == userid).ToListAsync();
@@ -53,6 +57,7 @@ namespace Task2.Controllers
         // PUT: api/Houses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutHouse(long id, House house)
         {
             if (id != house.Id)
@@ -84,6 +89,7 @@ namespace Task2.Controllers
         // POST: api/Houses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("NewHouse")]
+        [Authorize]
         public async Task<ActionResult<House>> PostHouse(House house)
         {
             _context.Houses.Add(house);
@@ -94,6 +100,7 @@ namespace Task2.Controllers
 
         // DELETE: api/Houses/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteHouse(long id)
         {
             var house = await _context.Houses.FindAsync(id);

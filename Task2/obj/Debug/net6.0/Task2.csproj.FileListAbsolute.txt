@@ -1056,3 +1056,4 @@ C:\Users\Pasha\Desktop\Task2\Task2-BackEnd-\Task2\obj\Debug\net6.0\Task2.dll
 C:\Users\Pasha\Desktop\Task2\Task2-BackEnd-\Task2\obj\Debug\net6.0\ref\Task2.dll
 C:\Users\Pasha\Desktop\Task2\Task2-BackEnd-\Task2\obj\Debug\net6.0\Task2.pdb
 C:\Users\Pasha\Desktop\Task2\Task2-BackEnd-\Task2\obj\Debug\net6.0\Task2.genruntimeconfig.cache
+C:\Users\Pasha\Desktop\Task2\Task2-BackEnd-\Task2\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
