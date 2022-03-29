@@ -16,7 +16,6 @@ namespace Task2.Controllers
     public class TenantsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly Mutex _mutex = new Mutex();
 
         public TenantsController(AppDbContext context)
         {
@@ -46,7 +45,7 @@ namespace Task2.Controllers
             return tenant;
         }
 
-        [HttpGet("getByUser/{id}")]
+        [HttpGet("getByUser/{userid}")]
         [Authorize]
         public async Task<ActionResult<Tenant[]>> GetTenantByUser(long userid)
         {

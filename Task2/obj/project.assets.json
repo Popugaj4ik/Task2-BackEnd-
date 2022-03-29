@@ -9720,24 +9720,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pasha\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Pavel Boldirev\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pasha\\Desktop\\Task2\\Task2-BackEnd-\\Task2\\Task2.csproj",
+      "projectUniqueName": "C:\\Users\\Pavel Boldirev\\Desktop\\p\\Task2-BackEnd-\\Task2\\Task2.csproj",
       "projectName": "Task2",
-      "projectPath": "C:\\Users\\Pasha\\Desktop\\Task2\\Task2-BackEnd-\\Task2\\Task2.csproj",
-      "packagesPath": "C:\\Users\\Pasha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pasha\\Desktop\\Task2\\Task2-BackEnd-\\Task2\\obj\\",
+      "projectPath": "C:\\Users\\Pavel Boldirev\\Desktop\\p\\Task2-BackEnd-\\Task2\\Task2.csproj",
+      "packagesPath": "C:\\Users\\Pavel Boldirev\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pavel Boldirev\\Desktop\\p\\Task2-BackEnd-\\Task2\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Pasha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Pavel Boldirev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9808,7 +9803,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

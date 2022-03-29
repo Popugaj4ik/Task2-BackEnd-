@@ -75,7 +75,7 @@ namespace Task2.Controllers
             return flatDTO;
         }
 
-        [HttpGet("getByUser/{id}")]
+        [HttpGet("getByUser/{userid}")]
         [Authorize]
         public async Task<ActionResult<Flat[]>> GetFlatsByUser(long userid)
         {
